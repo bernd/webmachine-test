@@ -4,6 +4,9 @@
 
 This library is still under development and incomplete!
 
+It will be merged into [webmachine-ruby](https://github.com/seancribbs/webmachine-ruby)
+when it's ready.
+
 ## Description
 
 Webmachine::Test provides a testing API for
