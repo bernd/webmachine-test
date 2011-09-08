@@ -35,6 +35,10 @@ module Webmachine
         do_request('GET', uri, options)
       end
 
+      def delete(uri, options = {})
+        do_request('DELETE', uri, options)
+      end
+
       # Execute a HEAD request.
       def head(uri, options = {})
         do_request('HEAD', uri, options)
