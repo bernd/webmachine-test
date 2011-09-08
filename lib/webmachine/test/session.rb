@@ -35,6 +35,15 @@ module Webmachine
         do_request('GET', uri, options)
       end
 
+      # Execute a HEAD request.
+      def head(uri, options = {})
+        do_request('HEAD', uri, options)
+      end
+
+      def options(uri, options = {})
+        do_request('OPTIONS', uri, options)
+      end
+
       private
       def webmachine_test_error(msg)
         raise Webmachine::Test::Error.new(msg)

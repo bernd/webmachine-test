@@ -29,42 +29,57 @@ describe Webmachine::Test::Session do
     end
   end
 
-  describe "#get" do
-    it "issues a GET request" do
-      get '/'
-      request.method.should == 'GET'
+  shared_examples_for "a HTTP verb" do
+    it "executes a GET request" do
+      send verb, '/'
+      request.method.should == verb.upcase
     end
 
     it "sets the provided header" do
-      get '/', :headers => {'Accept' => 'application/x-gunzip'}
+      send verb, '/', :headers => {'Accept' => 'application/x-gunzip'}
       request.headers['Accept'].should == 'application/x-gunzip'
     end
 
     context "with a complete URI" do
       it "sets the correct host header" do
-        get 'http://example.com:3000/foo'
+        send verb, 'http://example.com:3000/foo'
         request.headers['Host'].should == 'example.com:3000'
       end
     end
 
     context "with an incomplete URI" do
       it "sets the correct host header" do
-        get '/foo'
+        send verb, '/foo'
         request.headers['Host'].should == 'localhost'
       end
     end
 
     it "accepts query parameters in the path" do
-      get '/?lang=en&foo=bar'
+      send verb,'/?lang=en&foo=bar'
       request.query['lang'].should == 'en'
       request.query['foo'].should == 'bar'
     end
 
     it "accepts query parameters in the options hash" do
-      get '/?foo=bar', :params => {'lang' => 'en'}
+      send verb, '/?foo=bar', :params => {'lang' => 'en'}
       request.query['lang'].should == 'en'
       request.query['foo'].should == 'bar'
     end
+  end
+
+  describe "#get" do
+    let(:verb) { 'get' }
+    it_should_behave_like "a HTTP verb"
+  end
+
+  describe "#head" do
+    let(:verb) { 'head' }
+    it_should_behave_like "a HTTP verb"
+  end
+
+  describe "#options" do
+    let(:verb) { 'options' }
+    it_should_behave_like "a HTTP verb"
   end
 
   describe "#header" do
