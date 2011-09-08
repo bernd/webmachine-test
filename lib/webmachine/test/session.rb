@@ -56,7 +56,7 @@ module Webmachine
 
         @body ||= options[:body] || StringIO.new
 
-        @req = Webmachine::Request.new('GET', uri, @headers, @body)
+        @req = Webmachine::Request.new(method, uri, @headers, @body)
         @res = Webmachine::Response.new
 
         Webmachine::Dispatcher.dispatch(@req, @res)
