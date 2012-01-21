@@ -72,7 +72,7 @@ module Webmachine
         @req = Webmachine::Request.new(method, uri, @headers, @body)
         @res = Webmachine::Response.new
 
-        Webmachine::Dispatcher.dispatch(@req, @res)
+        app.dispatcher.dispatch(@req, @res)
       end
 
       def add_query_params(uri, params)

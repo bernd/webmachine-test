@@ -4,7 +4,11 @@ require 'bundler/setup'
 require 'webmachine/test'
 require 'fixtures/test_resource'
 
-RSpec.configure do |config|
-  Webmachine::Dispatcher.add_route(['*'], TestResource)
-  Webmachine.run
+class Webmachine::Test::Session
+  def app
+    @app ||= Webmachine::Application.new.tap do |test_app|
+      test_app.add_route(['*'], TestResource)
+    end
+  end
 end
+
