@@ -3,6 +3,12 @@ require 'spec_helper'
 describe Webmachine::Test::Session do
   include Webmachine::Test
 
+  let(:app) do
+    @app ||= Webmachine::Application.new.tap do |test_app|
+      test_app.add_route(['*'], TestResource)
+    end
+  end
+
   describe "#request" do
     it "returns the Webmachine::Request object" do
       get '/'

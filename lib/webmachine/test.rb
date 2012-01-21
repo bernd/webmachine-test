@@ -17,7 +17,7 @@ module Webmachine
     end
 
     def current_session
-      @session ||= Webmachine::Test::Session.new
+      @session ||= Webmachine::Test::Session.new(app)
     end
 
     def_delegators :current_session, :request, :header, :headers, :body, :response,
