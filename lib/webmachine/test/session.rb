@@ -3,6 +3,8 @@ require 'stringio'
 module Webmachine
   module Test
     class Session
+      HTTP_METHODS = %W(HEAD GET PUT POST PATCH OPTIONS)
+
       def initialize(app)
         @headers = Webmachine::Headers.new
         @body = nil
@@ -31,22 +33,10 @@ module Webmachine
         @body = value.respond_to?(:read) ? value : StringIO.new(value.to_s)
       end
 
-      # Issue a GET request.
-      def get(uri, options = {})
-        do_request('GET', uri, options)
-      end
-
-      def delete(uri, options = {})
-        do_request('DELETE', uri, options)
-      end
-
-      # Execute a HEAD request.
-      def head(uri, options = {})
-        do_request('HEAD', uri, options)
-      end
-
-      def options(uri, options = {})
-        do_request('OPTIONS', uri, options)
+      HTTP_METHODS.each do |method|
+        define_method method.downcase do |uri, options={}|
+          do_request(method.upcase, uri, options || {})
+        end
       end
 
       private
