@@ -34,7 +34,10 @@ Webmachine::Test provides a testing API for
       app.add_route(['*'], MyResource)
     end
 
-    MyApp.run
+    # decouple runner from application so that adapter
+    # does not start and block test thread
+    #
+    # MyApp.run
 ```
 
 ### Test with Test::Unit

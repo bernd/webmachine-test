@@ -3,12 +3,6 @@ require 'webmachine'
 require 'webmachine/test/session'
 
 module Webmachine
-  # Evil monkeypatch to avoid starting the backend too early.
-  # Is there something better?
-  def self.run
-    # NOOP
-  end
-
   module Test
     extend Forwardable
 
