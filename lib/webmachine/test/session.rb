@@ -3,11 +3,12 @@ require 'stringio'
 module Webmachine
   module Test
     class Session
-      def initialize
+      def initialize(app)
         @headers = Webmachine::Headers.new
         @body = nil
         @req = nil
         @res = nil
+        @app = app
       end
 
       # Returns the request object.
@@ -72,7 +73,7 @@ module Webmachine
         @req = Webmachine::Request.new(method, uri, @headers, @body)
         @res = Webmachine::Response.new
 
-        Webmachine::Dispatcher.dispatch(@req, @res)
+        @app.dispatcher.dispatch(@req, @res)
       end
 
       def add_query_params(uri, params)
