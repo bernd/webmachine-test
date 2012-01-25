@@ -3,12 +3,6 @@ require 'webmachine'
 require 'webmachine/test/session'
 
 module Webmachine
-  # Evil monkeypatch to avoid starting the backend too early.
-  # Is there something better?
-  def self.run
-    # NOOP
-  end
-
   module Test
     extend Forwardable
 
@@ -17,7 +11,7 @@ module Webmachine
     end
 
     def current_session
-      @session ||= Webmachine::Test::Session.new
+      @session ||= Webmachine::Test::Session.new(app)
     end
 
     def_delegators :current_session, :request, :header, :headers, :body, :response,

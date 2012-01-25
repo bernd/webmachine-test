@@ -20,7 +20,7 @@ Webmachine::Test provides a testing API for
 ```ruby
     require 'webmachine'
 
-    class MyApp < Webmachine::Resource
+    class MyResource < Webmachine::Resource
       def content_types_provided
         [['text/plain', :to_text]]
       end
@@ -30,8 +30,41 @@ Webmachine::Test provides a testing API for
       end
     end
 
-    Webmachine::Dispatcher.add_route(['*'], MyApp)
-    Webmachine.run
+    MyApp = Webmachine::Application.new.tap do |app|
+      app.add_route(['*'], MyResource)
+    end
+
+    # decouple runner from application so that adapter
+    # does not start and block test thread
+    #
+    # MyApp.run
+```
+
+### Test with Test::Unit
+
+```ruby
+    class MyAppTest < Test::Unit::TestCase
+      include Webmachine::Test
+
+      def test_get_root_succeeds
+        get '/'
+        assert_equal 200, response.code
+      end
+
+      def test_get_root_replies_with_string_ok
+        get '/'
+        assert_equal 'OK', response.body
+      end
+
+      def test_get_root_replies_with_content_type_of_text_plain
+        get '/'
+        assert_equal 'text/plain', response.headers['Content-Type']
+      end
+
+      def app
+        MyApp
+      end
+    end
 ```
 
 ### Test with RSpec
@@ -42,6 +75,8 @@ Webmachine::Test provides a testing API for
 
     describe MyApp do
       include Webmachine::Test
+
+      let(:app) { MyApp }
 
       describe 'GET /' do
         it 'succeeds' do
