@@ -3,7 +3,7 @@ require 'stringio'
 module Webmachine
   module Test
     class Session
-      HTTP_METHODS = %W(HEAD GET PUT POST PATCH OPTIONS)
+      HTTP_METHODS = %W(HEAD GET PUT POST PATCH DELETE OPTIONS)
 
       def initialize(app)
         @headers = Webmachine::Headers.new
