@@ -76,6 +76,21 @@ describe Webmachine::Test::Session do
     it_should_behave_like "a HTTP verb"
   end
 
+  describe "#post" do
+    let(:verb) { 'post' }
+    it_should_behave_like "a HTTP verb"
+  end
+
+  describe "#put" do
+    let(:verb) { 'put' }
+    it_should_behave_like "a HTTP verb"
+  end
+
+  describe "#patch" do
+    let(:verb) { 'patch' }
+    it_should_behave_like "a HTTP verb"
+  end
+
   describe "#delete" do
     let(:verb) { 'delete' }
     it_should_behave_like "a HTTP verb"
