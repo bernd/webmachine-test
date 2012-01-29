@@ -65,6 +65,10 @@ describe Webmachine::Test::Session do
       request.query['lang'].should == 'en'
       request.query['foo'].should == 'bar'
     end
+
+    it "returns the Webmachine::Request object" do
+      send(verb, '/').should be_a(Webmachine::Response)
+    end
   end
 
   describe "#get" do
