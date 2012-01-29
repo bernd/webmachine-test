@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 
+require 'webmachine/application'
 require 'webmachine/test'
 require 'fixtures/test_resource'
 
