@@ -69,7 +69,8 @@ module Webmachine
 
       def add_query_params(uri, params)
         if params
-          q = params.map {|k, v| "#{k}=#{v}"}.join('&')
+          q = params.map {|k, v| "#{k}=#{v}" }.join('&')
+          q = URI.escape(q)
 
           uri.query = uri.query ? [uri.query, q].join('&') : q
         end
