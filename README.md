@@ -1,6 +1,6 @@
 # Webmachine::Test
 
-[![Build Status](https://secure.travis-ci.org/bernd/webmachine-test.png)](http://travis-ci.org/bernd/webmachine-test])
+[![travis](https://secure.travis-ci.org/bernd/webmachine-test.png)](http://travis-ci.org/bernd/webmachine-test)
 
 ## WARNING
 
