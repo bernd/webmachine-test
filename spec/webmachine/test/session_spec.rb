@@ -66,6 +66,12 @@ describe Webmachine::Test::Session do
       request.query['foo'].should == 'bar'
     end
 
+    it "escapes the query parameters" do
+      expect {
+        send verb, '/', :params => {'test' => 'foo bar'}
+      }.to_not raise_error(URI::InvalidComponentError)
+    end
+
     it "returns the Webmachine::Request object" do
       send(verb, '/').should be_a(Webmachine::Response)
     end
