@@ -34,9 +34,11 @@ module Webmachine
       end
 
       HTTP_METHODS.each do |method|
-        define_method method.downcase do |uri, options={}|
-          do_request(method.upcase, uri, options || {})
-        end
+        class_eval <<-__RUBY
+          def #{method.downcase}(uri, options = {})
+            do_request('#{method.upcase}', uri, options)
+          end
+        __RUBY
       end
 
       private
