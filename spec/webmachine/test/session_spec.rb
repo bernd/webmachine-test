@@ -72,6 +72,11 @@ describe Webmachine::Test::Session do
       }.to_not raise_error(URI::InvalidComponentError)
     end
 
+    it "encodes the query key and value." do
+      send verb, '/', :params => { "foo=" => "bar=" }
+      request.uri.query.should == "foo%3D=bar%3D"
+    end
+
     it "returns the Webmachine::Request object" do
       send(verb, '/').should be_a(Webmachine::Response)
     end
