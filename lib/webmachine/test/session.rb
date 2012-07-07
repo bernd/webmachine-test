@@ -1,4 +1,10 @@
 require 'stringio'
+require 'uri'
+
+# Ruby 1.8 does not have URI.encode_www_form_component.
+unless URI.respond_to?(:encode_www_form_component)
+  require 'webmachine/test/backports/uri'
+end
 
 module Webmachine
   module Test
