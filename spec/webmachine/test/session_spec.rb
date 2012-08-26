@@ -130,7 +130,7 @@ describe Webmachine::Test::Session do
       it "sets the body" do
         body('test body')
         get '/'
-        request.body.read.should == 'test body'
+        request.body.should == 'test body'
       end
     end
 

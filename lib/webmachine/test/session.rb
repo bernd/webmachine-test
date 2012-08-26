@@ -36,7 +36,7 @@ module Webmachine
 
       # Set the request body.
       def body(value)
-        @body = value.respond_to?(:read) ? value : StringIO.new(value.to_s)
+        @body = value
       end
 
       HTTP_METHODS.each do |method|
