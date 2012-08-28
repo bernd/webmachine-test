@@ -126,20 +126,10 @@ describe Webmachine::Test::Session do
   end
 
   describe "#body" do
-    context "given a string" do
-      it "sets the body" do
-        body('test body')
-        get '/'
-        request.body.should == 'test body'
-      end
-    end
-
-    context "given an IO object" do
-      it "sets the body" do
-        body(StringIO.new('foo'))
-        get '/'
-        request.body.read.should == 'foo'
-      end
+    it "sets the body" do
+      body('test body')
+      get '/'
+      request.body.should == 'test body'
     end
   end
 end
