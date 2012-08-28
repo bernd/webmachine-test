@@ -131,5 +131,10 @@ describe Webmachine::Test::Session do
       get '/'
       request.body.should == 'test body'
     end
+
+    it "defaults to a nil body" do
+      get '/'
+      request.body.should be_nil
+    end
   end
 end

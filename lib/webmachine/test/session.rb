@@ -1,4 +1,3 @@
-require 'stringio'
 require 'uri'
 
 # Ruby 1.8 does not have URI.encode_www_form_component.
@@ -66,7 +65,7 @@ module Webmachine
         options[:headers] ||= {}
         options[:headers].each { |k, v| @headers[k] = v }
 
-        @body ||= options[:body] || StringIO.new
+        @body ||= options[:body]
 
         @req = Webmachine::Request.new(method, uri, @headers, @body)
         @res = Webmachine::Response.new
