@@ -17,15 +17,29 @@ describe Webmachine::Test::Session do
   end
 
   describe "#response" do
-    it "returns the Webmachine::Response object" do
-      get '/'
-      response.should be_a(Webmachine::Response)
-    end
-
     context "without a request" do
       it "raises an exception" do
         expect { response }.to raise_error(Webmachine::Test::Error)
       end
+    end
+
+    context "with an untraceable resource" do
+      before { get '/' }
+
+      subject { response }
+
+      it { should be_a(Webmachine::Response) }
+      its(:code) { should eql(200) }
+      its(:body) { should eql('OK') }
+    end
+
+    context "with a traceable resource" do
+      before { get '/traceme' }
+
+      subject { response }
+
+      its(:code) { should eql(200) }
+      its(:body) { should include('html_hi') }
     end
   end
 
@@ -50,12 +64,12 @@ describe Webmachine::Test::Session do
     context "with an incomplete URI" do
       it "sets the correct host header" do
         send verb, '/foo'
-        request.headers['Host'].should == 'localhost'
+        request.headers['Host'].should == 'localhost:80'
       end
     end
 
     it "accepts query parameters in the path" do
-      send verb,'/?lang=en&foo=bar'
+      send verb, '/?lang=en&foo=bar'
       request.query['lang'].should == 'en'
       request.query['foo'].should == 'bar'
     end
@@ -73,7 +87,7 @@ describe Webmachine::Test::Session do
     end
 
     it "encodes the query key and value." do
-      send verb, '/', :params => { "foo=" => "bar=" }
+      send verb, '/', :params => {"foo=" => "bar="}
       request.uri.query.should == "foo%3D=bar%3D"
     end
 
