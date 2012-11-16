@@ -52,7 +52,7 @@ module Webmachine
       end
 
       def do_request(method, uri, options)
-        uri = "http://localhost#{uri}" unless uri =~ /^http:\/\//
+        uri = "http://localhost#{uri}" unless uri =~ %r(^https?://)
         uri = URI.parse(uri)
 
         add_query_params(uri, options[:params])
