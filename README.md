@@ -32,7 +32,7 @@ Webmachine::Test provides a testing API for
       end
     end
 
-    MyApp = Webmachine::Application.new.tap do |app|
+    MyApp = Webmachine::Application.new do |app|
       app.add_route(['*'], MyResource)
     end
 
