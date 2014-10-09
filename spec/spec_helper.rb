@@ -1,6 +1,5 @@
-require 'rubygems'
-require 'bundler/setup'
-
+﻿require 'bundler/setup'
+require 'rspec/its'
 require 'webmachine/application'
 require 'webmachine/test'
 require 'webmachine'
@@ -13,7 +12,7 @@ module WebmachineTestApplication
     @app ||= Webmachine::Application.new do |test_app|
       test_app.routes do
         add ['traceme'], TraceableResource
-        add ['*'], TestResource
+        add [:*], TestResource
       end
     end
   end

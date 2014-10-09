@@ -1,6 +1,7 @@
-source :rubygems
+﻿source 'https://rubygems.org'
 
 gem 'rake'
 gem 'rspec'
+gem 'rspec-its'
 gem 'ZenTest'
-gem 'webmachine', :git => 'https://github.com/seancribbs/webmachine-ruby'
+gem 'webmachine', github: 'seancribbs/webmachine-ruby'

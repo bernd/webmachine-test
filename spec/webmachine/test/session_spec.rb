@@ -1,4 +1,4 @@
-require 'spec_helper'
+﻿require 'spec_helper'
 
 describe Webmachine::Test::Session do
   include Webmachine::Test
@@ -83,7 +83,7 @@ describe Webmachine::Test::Session do
     it "escapes the query parameters" do
       expect {
         send verb, '/', :params => {'test' => 'foo bar'}
-      }.to_not raise_error(URI::InvalidComponentError)
+      }.to_not raise_error
     end
 
     it "encodes the query key and value." do
