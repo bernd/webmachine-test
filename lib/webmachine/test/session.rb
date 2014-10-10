@@ -1,4 +1,7 @@
-﻿require 'uri'
+﻿require 'webmachine/headers'
+require 'uri'
+require 'webmachine/request'
+require 'webmachine/response'
 
 module Webmachine
   module Test

@@ -13,8 +13,12 @@ Gem::Specification.new do |s|
     by rack-test.
   DESC
 
-  s.files         = Dir['README.md', 'lib/**/*']
-  s.test_files    = Dir['spec/**/*']
+  s.files       = Dir['README.md', 'lib/**/*']
+  s.test_files  = Dir['Gemfile', 'Rakefile', '.rspec', 'spec/**/*']
 
-  s.add_runtime_dependency(%q<webmachine>)
+  s.add_dependency('webmachine')
+  s.add_development_dependency('rake')
+  s.add_development_dependency('rspec')
+  s.add_development_dependency('rspec-its')
+  s.add_development_dependency('bundler')
 end

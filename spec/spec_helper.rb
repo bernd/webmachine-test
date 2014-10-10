@@ -1,8 +1,6 @@
 ﻿require 'bundler/setup'
 require 'rspec/its'
-require 'webmachine/application'
 require 'webmachine/test'
-require 'webmachine'
 
 require 'fixtures/test_resource'
 require 'fixtures/traceable_resource'
