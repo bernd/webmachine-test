@@ -151,4 +151,17 @@ describe Webmachine::Test::Session do
       request.body.should be_nil
     end
   end
+  describe "#cookie" do
+    it "sets a cookie" do
+      cookie('SOME_COOKIE', 'VALUE')
+      get '/'
+      request.headers['COOKIE'].should eq('SOME_COOKIE=VALUE')
+    end
+    it "forwards cookies sent by the server (like a browser)" do
+      get '/'
+      request.headers['COOKIE'].should be_nil
+      get '/'
+      request.headers['COOKIE'].should eq('TEST=VALUE')
+    end
+  end
 end
