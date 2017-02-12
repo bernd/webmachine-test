@@ -35,6 +35,9 @@ module Webmachine
       def cookie(name, value)
         @session_cookies[name] = value
       end
+      def session_cookies
+        @session_cookies
+      end
 
       # Set the request body.
       def body(value)

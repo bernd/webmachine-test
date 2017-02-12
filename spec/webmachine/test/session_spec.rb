@@ -163,5 +163,9 @@ describe Webmachine::Test::Session do
       get '/'
       request.headers['COOKIE'].should eq('TEST=VALUE')
     end
+    it "shows available session cookies" do
+      get '/'
+      session_cookies['TEST'].should eq('VALUE')
+    end
   end
 end
