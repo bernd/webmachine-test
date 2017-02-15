@@ -31,10 +31,11 @@ module Webmachine
       def header(name, value)
         @headers[name] = value
       end
-      
+
       def cookie(name, value)
         @session_cookies[name] = value
       end
+
       def session_cookies
         @session_cookies
       end
@@ -82,9 +83,10 @@ module Webmachine
         update_session_cookies
         return @res
       end
+
       def update_session_cookies
-        if  @res.headers['Set-Cookie']
-          @res.headers['Set-Cookie'].reduce(@session_cookies) do |cookies, c| 
+        if @res.headers['Set-Cookie']
+          @res.headers['Set-Cookie'].reduce(@session_cookies) do |cookies, c|
             cookie_info = c.split(';')
             kv = Webmachine::Cookie.parse(cookie_info.shift)
             cname = kv.keys.first
@@ -120,6 +122,7 @@ module Webmachine
           uri.query = uri.query ? [uri.query, q].join('&') : q
         end
       end
+
       def add_cookies
         as_strings = @session_cookies.map do |k,v|
           "#{k}=#{v}"
