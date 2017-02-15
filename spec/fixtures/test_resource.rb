@@ -4,6 +4,7 @@ class TestResource < Webmachine::Resource
   end
 
   def to_text
+    response.set_cookie 'TEST', 'VALUE'
     'OK'
   end
 end
